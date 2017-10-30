@@ -35,9 +35,18 @@ public class ControlJuego {
 	 * 			El resto de posiciones que no son minas guardan en el entero cuántas minas hay alrededor de la celda
 	 */
 	public void inicializarPartida(){
-
-		System.out.println("CAMBIO PA EL GITHUUB");
+		int contadorMinas = 0;
+		while(contadorMinas <= MINAS_INICIALES){
+			Random rd = new Random();
+			int ale1 = rd.nextInt(10);
+			int ale2 = rd.nextInt(10);
+			if (tablero[ale1][ale2] != MINA) {
+				tablero[ale1][ale2] = MINA;
+				contadorMinas++;
+			}
+		}
 		
+		depurarTablero();
 	}
 	
 	/**Cálculo de las minas adjuntas:
