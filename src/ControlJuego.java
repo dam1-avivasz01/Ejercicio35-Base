@@ -36,6 +36,7 @@ public class ControlJuego {
 	 */
 	public void inicializarPartida(){
 
+		System.out.println("CAMBIO PA EL GITHUUB");
 		
 	}
 	
