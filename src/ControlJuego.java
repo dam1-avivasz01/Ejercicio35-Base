@@ -46,7 +46,6 @@ public class ControlJuego {
 			}
 		}
 		
-		depurarTablero();
 	}
 	
 	/**Cálculo de las minas adjuntas:
@@ -58,7 +57,84 @@ public class ControlJuego {
 	 * @return : El número de minas que hay alrededor de la casilla [i][j]
 	 **/
 	private int calculoMinasAdjuntas(int i, int j){
-
+		int minas = 0;
+		
+			//Caso 1, Esquina superior izq.
+			if((i == 0)&&(j == 0)&&(tablero[j][i] != -1)) {
+				if (tablero[i][j+1] == -1) {
+					minas++;
+				}
+				if (tablero[i+1][j] == -1) {
+					minas++;
+				}
+				if (tablero[i+1][j+1] == -1) {
+					minas++;
+				}
+			}
+			
+			//Caso 2, Esquina superior derecha.
+			if ((i == 0)&&(j == 9)&&(tablero[j][i] != -1)) {
+				if (tablero[i][j-1] == -1) {
+					minas++;
+				}
+				if (tablero[i+1][j] == -1) {
+					minas++;
+				}
+				if (tablero[i+1][j-1] == -1) {
+					minas++;
+				}
+			}
+			
+			//Caso 3, Esquina inferior izq.
+			if ((i == 9)&&(j == 0)&&(tablero[j][i] != -1)) {
+				if (tablero[i-1][j] == -1) {
+					minas++;
+				}
+				if (tablero[i-1][j-1] == -1) {
+					minas++;
+				}
+				if (tablero[i][j+1] == -1) {
+					minas++;
+				}
+			}
+			
+			//Caso 4, Esquina inferior derecha
+			if ((i == 9)&&(j == 9)&&(tablero[j][i] != -1)) {
+				if (tablero[i-1][j] == -1) {
+					minas++;
+				}
+				if (tablero[i-1][j-1] == -1) {
+					minas++;
+				}
+				if (tablero[i][j-1] == -1) {
+					minas++;
+				}
+			}
+			
+			//Caso5, Linea izquierda
+			if ((j == 0)&&(i != 0)&&(tablero[j][i] != -1)) {
+				if (tablero[i-1][j] == -1) {
+					minas++;
+				}
+				
+				if (tablero[i-1][j+1] == -1) {
+					minas++;
+				}
+				if (tablero[i][j+1] == -1) {
+					minas++;
+				}
+				if (tablero[i+1][j+1] == -1) {
+					minas++;
+				}
+				if (tablero[i+1][j] == -1) {
+					minas++;
+				}
+			}
+			if ((i == 9)&&(j != 0)&&(tablero[j][i] != -1)) {
+				
+			}
+			
+		
 	}
 	
 	/**
