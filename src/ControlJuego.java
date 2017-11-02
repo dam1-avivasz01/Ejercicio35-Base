@@ -24,6 +24,7 @@ public class ControlJuego {
 		//Creamos el tablero:
 		tablero = new int[LADO_TABLERO][LADO_TABLERO];
 		
+		puntuacion = 0;
 		//Inicializamos una nueva partida
 		inicializarPartida();
 	}
@@ -47,7 +48,7 @@ public class ControlJuego {
 		}
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero.length; j++) {
-				if (tablero[i][j] != -1) {
+				if (tablero[i][j] != MINA) {
 					tablero[i][j] = calculoMinasAdjuntas(i, j);
 				}
 			}
@@ -69,153 +70,153 @@ public class ControlJuego {
 		
 		//Caso 1, Esquina superior izq.
 			if((i == 0)&&(j == 0)) {
-				if (tablero[i][j+1] == -1) {
+				if (tablero[i][j+1] == MINA) {
 					minas++;
 				}
-				if (tablero[i+1][j] == -1) {
+				if (tablero[i+1][j] == MINA) {
 					minas++;
 				}
-				if (tablero[i+1][j+1] == -1) {
+				if (tablero[i+1][j+1] == MINA) {
 					minas++;
 				}
 			}
 			
 			//Caso 2, Esquina superior derecha.
 			if ((i == 0)&&(j == LADO_TABLERO-1)) {
-				if (tablero[i][j-1] == -1) {
+				if (tablero[i][j-1] == MINA) {
 					minas++;
 				}
-				if (tablero[i+1][j] == -1) {
+				if (tablero[i+1][j] == MINA) {
 					minas++;
 				}
-				if (tablero[i+1][j-1] == -1) {
+				if (tablero[i+1][j-1] == MINA) {
 					minas++;
 				}
 			}
 			
 			//Caso 3, Esquina inferior izq.
 			if ((i == LADO_TABLERO-1)&&(j == 0)) {
-				if (tablero[i-1][j] == -1) {
+				if (tablero[i-1][j] == MINA) {
 					minas++;
 				}
-				if (tablero[i-1][j+1] == -1) {
+				if (tablero[i-1][j+1] == MINA) {
 					minas++;
 				}
-				if (tablero[i][j+1] == -1) {
+				if (tablero[i][j+1] == MINA) {
 					minas++;
 				}
 			}
 			
 			//Caso 4, Esquina inferior derecha
 			if ((i == LADO_TABLERO-1)&&(j == LADO_TABLERO-1)) {
-				if (tablero[i-1][j] == -1) {
+				if (tablero[i-1][j] == MINA) {
 					minas++;
 				}
-				if (tablero[i-1][j-1] == -1) {
+				if (tablero[i-1][j-1] == MINA) {
 					minas++;
 				}
-				if (tablero[i][j-1] == -1) {
+				if (tablero[i][j-1] == MINA) {
 					minas++;
 				}
 			}
 			
 			//Caso5, Linea izquierda
 			if ((j == 0)&&(i > 0)&&(i < LADO_TABLERO-1)) {
-				if (tablero[i-1][j] == -1) {
+				if (tablero[i-1][j] == MINA) {
 					minas++;
 				}
 				
-				if (tablero[i-1][j+1] == -1) {
+				if (tablero[i-1][j+1] == MINA) {
 					minas++;
 				}
-				if (tablero[i][j+1] == -1) {
+				if (tablero[i][j+1] == MINA) {
 					minas++;
 				}
-				if (tablero[i+1][j+1] == -1) {
+				if (tablero[i+1][j+1] == MINA) {
 					minas++;
 				}
-				if (tablero[i+1][j] == -1) {
+				if (tablero[i+1][j] == MINA) {
 					minas++;
 				}
 			}
 			//Caso 6, Linea inferior;
 			if ((i == LADO_TABLERO-1)&&(j > 0)&&(j < LADO_TABLERO-1)) {
-				if (tablero[i][j-1] == -1) {
+				if (tablero[i][j-1] == MINA) {
 					minas++;
 				}
-				if (tablero[i-1][j-1] == -1) {
+				if (tablero[i-1][j-1] == MINA) {
 					minas++;
 				}
-				if (tablero[i-1][j] == -1) {
+				if (tablero[i-1][j] == MINA) {
 					minas++;
 				}
-				if (tablero[i-1][j+1] == -1) {
+				if (tablero[i-1][j+1] == MINA) {
 					minas++;
 				}
-				if (tablero[i][j+1] == -1) {
+				if (tablero[i][j+1] == MINA) {
 					minas++;
 				}
 			}
 			//Caso 7, Linea derecha
 			if ((j == LADO_TABLERO-1)&&(i > 0)&&(i < LADO_TABLERO-1)) {
-				if (tablero[i-1][j] == -1) {
+				if (tablero[i-1][j] == MINA) {
 					minas++;
 				}
-				if (tablero[i-1][j-1] == -1) {
+				if (tablero[i-1][j-1] == MINA) {
 					minas++;
 				}
-				if (tablero[i][j-1] == -1) {
+				if (tablero[i][j-1] == MINA) {
 					minas++;
 				}
-				if (tablero[i+1][j-1] == -1) {
+				if (tablero[i+1][j-1] == MINA) {
 					minas++;
 				}
-				if (tablero[i+1][j] == -1) {
+				if (tablero[i+1][j] == MINA) {
 					minas++;
 				}
 			}
 			//Caso 8, Linea superior
 			if ((i == 0)&&(j > 0)&&(j < LADO_TABLERO-1)) {
-				if (tablero[i][j-1] == -1) {
+				if (tablero[i][j-1] == MINA) {
 					minas++;
 				}
-				if (tablero[i+1][j-1] == -1) {
+				if (tablero[i+1][j-1] == MINA) {
 					minas++;
 				}
-				if (tablero[i+1][j] == -1) {
+				if (tablero[i+1][j] == MINA) {
 					minas++;
 				}
-				if (tablero[i+1][j+1] == -1) {
+				if (tablero[i+1][j+1] == MINA) {
 					minas++;
 				}
-				if (tablero[i][j+1] == -1) {
+				if (tablero[i][j+1] == MINA) {
 					minas++;
 				}
 			}
 			//Caso 9, caso normal
 			if ((i > 0)&&(i < LADO_TABLERO-1)&&(j > 0)&&(j < LADO_TABLERO-1)) {
-				if (tablero[i-1][j] == -1) {
+				if (tablero[i-1][j] == MINA) {
 					minas++;
 				}
-				if (tablero[i-1][j-1] == -1) {
+				if (tablero[i-1][j-1] == MINA) {
 					minas++;
 				}
-				if (tablero[i][j-1] == -1) {
+				if (tablero[i][j-1] == MINA) {
 					minas++;
 				}
-				if (tablero[i+1][j-1] == -1) {
+				if (tablero[i+1][j-1] == MINA) {
 					minas++;
 				}
-				if (tablero[i+1][j+1] == -1) {
+				if (tablero[i+1][j+1] == MINA) {
 					minas++;
 				}
-				if (tablero[i+1][j] == -1) {
+				if (tablero[i+1][j] == MINA) {
 					minas++;
 				}
-				if (tablero[i][j+1] == -1) {
+				if (tablero[i][j+1] == MINA) {
 					minas++;
 				}
-				if (tablero[i-1][j+1] == -1) {
+				if (tablero[i-1][j+1] == MINA) {
 					minas++;
 				}
 			}
@@ -231,9 +232,14 @@ public class ControlJuego {
 	 * @return : Verdadero si no ha explotado una mina. Falso en caso contrario.
 	 */
 	public boolean abrirCasilla(int i, int j){
-
+			if (tablero[i][j] != -1) {
+				puntuacion++;
+				return true;
+			}else {
+				return false;
+			}
+		
 	}
-	
 	
 	
 	/**
@@ -241,6 +247,11 @@ public class ControlJuego {
 	 * @return Devuelve verdadero si se han abierto todas las celdas que no son minas.
 	 **/
 	public boolean esFinJuego(){
+		if (getPuntuacion() == (LADO_TABLERO*LADO_TABLERO)-MINAS_INICIALES) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	
@@ -266,6 +277,7 @@ public class ControlJuego {
 	 * @return Un entero que representa el número de minas alrededor de la celda
 	 */
 	public int getMinasAlrededor(int i, int j) {
+		return tablero[i][j];
 	}
 
 	/**
@@ -273,6 +285,7 @@ public class ControlJuego {
 	 * @return Un entero con la puntuación actual
 	 */
 	public int getPuntuacion() {
+		return puntuacion;
 	}
 	
 }

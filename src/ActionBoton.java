@@ -10,11 +10,15 @@ import java.awt.event.ActionListener;
  **
  */
 public class ActionBoton implements ActionListener{
-
+	VentanaPrincipal ventana;
+	int i;
+	int j;
 	
 
-	public ActionBoton() {
-		//TODO
+	public ActionBoton(VentanaPrincipal ventana, int i, int j) {
+		this.ventana = ventana;
+		this.i = i;
+		this.j = j;
 	}
 	
 	/**
@@ -22,7 +26,7 @@ public class ActionBoton implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//TODO
+		
 	}
 
 }
