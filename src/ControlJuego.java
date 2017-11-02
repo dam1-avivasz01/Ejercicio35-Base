@@ -45,7 +45,15 @@ public class ControlJuego {
 				contadorMinas++;
 			}
 		}
+		for (int i = 0; i < tablero.length; i++) {
+			for (int j = 0; j < tablero.length; j++) {
+				if (tablero[i][j] != -1) {
+					tablero[i][j] = calculoMinasAdjuntas(i, j);
+				}
+			}
+		}
 		
+		depurarTablero();
 	}
 	
 	/**Cálculo de las minas adjuntas:
@@ -59,8 +67,8 @@ public class ControlJuego {
 	private int calculoMinasAdjuntas(int i, int j){
 		int minas = 0;
 		
-			//Caso 1, Esquina superior izq.
-			if((i == 0)&&(j == 0)&&(tablero[j][i] != -1)) {
+		//Caso 1, Esquina superior izq.
+			if((i == 0)&&(j == 0)) {
 				if (tablero[i][j+1] == -1) {
 					minas++;
 				}
@@ -73,7 +81,7 @@ public class ControlJuego {
 			}
 			
 			//Caso 2, Esquina superior derecha.
-			if ((i == 0)&&(j == 9)&&(tablero[j][i] != -1)) {
+			if ((i == 0)&&(j == LADO_TABLERO-1)) {
 				if (tablero[i][j-1] == -1) {
 					minas++;
 				}
@@ -86,11 +94,11 @@ public class ControlJuego {
 			}
 			
 			//Caso 3, Esquina inferior izq.
-			if ((i == 9)&&(j == 0)&&(tablero[j][i] != -1)) {
+			if ((i == LADO_TABLERO-1)&&(j == 0)) {
 				if (tablero[i-1][j] == -1) {
 					minas++;
 				}
-				if (tablero[i-1][j-1] == -1) {
+				if (tablero[i-1][j+1] == -1) {
 					minas++;
 				}
 				if (tablero[i][j+1] == -1) {
@@ -99,7 +107,7 @@ public class ControlJuego {
 			}
 			
 			//Caso 4, Esquina inferior derecha
-			if ((i == 9)&&(j == 9)&&(tablero[j][i] != -1)) {
+			if ((i == LADO_TABLERO-1)&&(j == LADO_TABLERO-1)) {
 				if (tablero[i-1][j] == -1) {
 					minas++;
 				}
@@ -112,7 +120,7 @@ public class ControlJuego {
 			}
 			
 			//Caso5, Linea izquierda
-			if ((j == 0)&&(i != 0)&&(tablero[j][i] != -1)) {
+			if ((j == 0)&&(i > 0)&&(i < LADO_TABLERO-1)) {
 				if (tablero[i-1][j] == -1) {
 					minas++;
 				}
@@ -130,11 +138,89 @@ public class ControlJuego {
 					minas++;
 				}
 			}
-			if ((i == 9)&&(j != 0)&&(tablero[j][i] != -1)) {
-				
+			//Caso 6, Linea inferior;
+			if ((i == LADO_TABLERO-1)&&(j > 0)&&(j < LADO_TABLERO-1)) {
+				if (tablero[i][j-1] == -1) {
+					minas++;
+				}
+				if (tablero[i-1][j-1] == -1) {
+					minas++;
+				}
+				if (tablero[i-1][j] == -1) {
+					minas++;
+				}
+				if (tablero[i-1][j+1] == -1) {
+					minas++;
+				}
+				if (tablero[i][j+1] == -1) {
+					minas++;
+				}
+			}
+			//Caso 7, Linea derecha
+			if ((j == LADO_TABLERO-1)&&(i > 0)&&(i < LADO_TABLERO-1)) {
+				if (tablero[i-1][j] == -1) {
+					minas++;
+				}
+				if (tablero[i-1][j-1] == -1) {
+					minas++;
+				}
+				if (tablero[i][j-1] == -1) {
+					minas++;
+				}
+				if (tablero[i+1][j-1] == -1) {
+					minas++;
+				}
+				if (tablero[i+1][j] == -1) {
+					minas++;
+				}
+			}
+			//Caso 8, Linea superior
+			if ((i == 0)&&(j > 0)&&(j < LADO_TABLERO-1)) {
+				if (tablero[i][j-1] == -1) {
+					minas++;
+				}
+				if (tablero[i+1][j-1] == -1) {
+					minas++;
+				}
+				if (tablero[i+1][j] == -1) {
+					minas++;
+				}
+				if (tablero[i+1][j+1] == -1) {
+					minas++;
+				}
+				if (tablero[i][j+1] == -1) {
+					minas++;
+				}
+			}
+			//Caso 9, caso normal
+			if ((i > 0)&&(i < LADO_TABLERO-1)&&(j > 0)&&(j < LADO_TABLERO-1)) {
+				if (tablero[i-1][j] == -1) {
+					minas++;
+				}
+				if (tablero[i-1][j-1] == -1) {
+					minas++;
+				}
+				if (tablero[i][j-1] == -1) {
+					minas++;
+				}
+				if (tablero[i+1][j-1] == -1) {
+					minas++;
+				}
+				if (tablero[i+1][j+1] == -1) {
+					minas++;
+				}
+				if (tablero[i+1][j] == -1) {
+					minas++;
+				}
+				if (tablero[i][j+1] == -1) {
+					minas++;
+				}
+				if (tablero[i-1][j+1] == -1) {
+					minas++;
+				}
 			}
 			
-		
+		return minas;
 	}
 	
 	/**
