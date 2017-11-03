@@ -23,6 +23,7 @@ public class VentanaPrincipal {
 	JPanel panelEmpezar;
 	JPanel panelPuntuacion;
 	JPanel panelJuego;
+	VentanaPrincipal esta = this;
 	
 	//Todos los botones se meten en un panel independiente.
 	//Hacemos esto para que podamos cambiar después los componentes por otros
@@ -145,6 +146,34 @@ public class VentanaPrincipal {
 				botonesJuego[i][j].addActionListener(new ActionBoton(this, i, j));
 			}
 		}
+		
+		botonEmpezar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i < panelesJuego.length; i++) {
+					for (int j = 0; j < panelesJuego.length; j++) {
+						panelesJuego[i][j].removeAll();					
+					}
+				}
+				
+				for (int i = 0; i < botonesJuego.length; i++) {
+					for (int j = 0; j < botonesJuego.length; j++) {
+						botonesJuego[i][j] = new JButton("-");
+						botonesJuego[i][j].addActionListener(new ActionBoton(esta, i, j));
+						panelesJuego[i][j].add(botonesJuego[i][j]);
+					}
+				}
+				juego = new ControlJuego();
+				actualizarPuntuacion();
+				refrescarPantalla();
+				
+				
+				
+				
+				
+			}
+		});
 	}
 	
 	
@@ -164,9 +193,10 @@ public class VentanaPrincipal {
 		panelesJuego[i][j].removeAll();
 		
 		int numMinas = getJuego().getMinasAlrededor(i, j);
-		String numMinas2 = String.valueOf(juego.getMinasAlrededor(i, j));
+		String numMinas2 = String.valueOf(numMinas);
 		
-		JLabel minas = new JLabel(numMinas2);
+		JLabel minas = new JLabel(numMinas2, SwingConstants.CENTER);
+		panelesJuego[i][j].add(minas);
 		
 		if (numMinas == 0) {
 			minas.setForeground(correspondenciaColores[numMinas]);
@@ -199,14 +229,14 @@ public class VentanaPrincipal {
 			JOptionPane.showMessageDialog(ventana, "HAS MUERTO POR EXPLOSIOOON!!! BOOOOM!!! TOLAI!!!", "HAS MUELTO", 1);
 			for (int i = 0; i < botonesJuego.length; i++) {
 				for (int j = 0; j < botonesJuego.length; j++) {
-					botonesJuego[i][j].disable();
+					botonesJuego[i][j].setEnabled(false);
 				}
 			}
 		}else {
 			JOptionPane.showMessageDialog(ventana, "HAS GANADOOOOO!!! GOOD JOOB!!!", "HAS GANADO", 1);
 			for (int i = 0; i < botonesJuego.length; i++) {
 				for (int j = 0; j < botonesJuego.length; j++) {
-					botonesJuego[i][j].disable();
+					botonesJuego[i][j].setEnabled(false);
 				}
 			}
 		}

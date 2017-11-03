@@ -17,7 +17,7 @@ public class ControlJuego {
 	final int LADO_TABLERO = 10;
 
 	private int [][] tablero;
-	private int puntuacion;
+	private int puntuacion = 0;
 	
 	
 	public ControlJuego() {
@@ -37,7 +37,7 @@ public class ControlJuego {
 	 */
 	public void inicializarPartida(){
 		int contadorMinas = 0;
-		while(contadorMinas <= MINAS_INICIALES){
+		while(contadorMinas < MINAS_INICIALES){
 			Random rd = new Random();
 			int ale1 = rd.nextInt(10);
 			int ale2 = rd.nextInt(10);
