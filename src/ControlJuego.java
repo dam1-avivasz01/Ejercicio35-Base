@@ -54,7 +54,6 @@ public class ControlJuego {
 			}
 		}
 		
-		depurarTablero();
 	}
 	
 	/**Cálculo de las minas adjuntas:
